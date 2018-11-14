@@ -18,7 +18,7 @@ Discord bot project for personal server use, using discord.js npm package.
 3. In the root folder of this repo, make a file called `auth.json`. Using your bot's token from the development site, write `{"token":""INSERT YOUR TOKEN HERE!"}`
 4. From the root folder of this repo, `node src/bot.js`. You can now interact with the bot using the commands.
 
-##Changelog
+## Changelog
 1.0.0 - Added initial bot, and `!ping` command.
 
 ## Author
