@@ -29,6 +29,8 @@ As for notation of moves, use [Tekken Notation](http://www.tekkenzaibatsu.com/le
 
 1.1.0 - Added `!tekken` and `!help` commands.
 
+1.1.1 - Improved the `!tekken` command's embed.
+
 ## Author
 [Diego Ramos](https://github.com/diego-ramos130)
 
