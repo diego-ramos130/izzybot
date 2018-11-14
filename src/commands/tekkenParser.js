@@ -14,16 +14,13 @@ const Discord = require('discord.js');
 }
 */
 module.exports = (move) => {
-  const embed = new Discord.RichEmbed()
+  return new Discord.RichEmbed()
     .setColor('#FFB6C1')
-    .addField('Start up frames', move['Start up frame'], true)
-    .addField('Hit frames', move['Hit frame'], true)
-    .addField('Counter hit frames', move['Counter hit frame'], true)
-    .addField('Command', move.Command)
-    .addField('Block frames,', move['Block frame'], true)
+    .addField('Start Up Frames', move['Start up frame'], true)
+    .addField('On hit', move['Hit frame'], true)
+    .addField('On CH', move['Counter hit frame'], true)
+    .addField('On Block', move['Block frame'], true)
     .addField('Hit level', move['Hit level'], true)
     .addField('Damage', move.Damage, true)
     .addField('Notes', move.Notes);
-
-  return embed;
 };
