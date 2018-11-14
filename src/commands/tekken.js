@@ -18,13 +18,22 @@ module.exports = (command) => {
   //   return move.Command === queryMove;
   // });
   // if (foundMove === undefined) {
-  const foundMoveTwo = moves.find((move) => {
+  const foundMove = moves.find((move) => {
     return move.Command.includes(queryMove);
   });
-  if (foundMoveTwo === undefined) {
+  if (foundMove === undefined) {
     return 'Not found!';
   }
-  return tekkenParser(foundMoveTwo);
+  const split = char.split('_');
+  for (let i = 0; i < split.length; i++) {
+    split[i] = split[i].charAt(0).toUpperCase() + split[i].substring(1);
+  }
+  const title = split.join(' ');
+
+  const embed = tekkenParser(foundMove);
+  embed.setTitle(title);
+  embed.setDescription(queryMove);
+  return embed;
 
   // return tekkenParser(foundMove);
 };
