@@ -4,13 +4,16 @@ const fs = require('fs');
 
 const charQuery = require('./charQuery');
 const moveQuery = require('./moveQuery');
+const tekkenParser = require('./tekkenParser');
 
 module.exports = (command) => {
-  const splitCommands = command.split(' ');
+  const splitCommands = command.trim().split(' ');
   splitCommands.shift();
   const queryMove = moveQuery(splitCommands);
   const char = charQuery(splitCommands);
+
   const moves = JSON.parse(fs.readFileSync(`${__dirname}/../../json/${char}.json`));
+
   const foundMove = moves.find((move) => {
     return move.Command === queryMove;
   });
@@ -21,7 +24,7 @@ module.exports = (command) => {
     if (foundMoveTwo === undefined) {
       return 'Not found!';
     }
-    return JSON.stringify(foundMoveTwo);
+    return tekkenParser(foundMoveTwo);
   }
-  return JSON.stringify(foundMove);
+  return tekkenParser(foundMove);
 };

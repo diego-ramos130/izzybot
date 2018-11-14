@@ -22,7 +22,10 @@ client.on('message', (message) => {
         message.channel.send(`Pong! ${client.ping} ms`);
         break;
       case '!tekken':
-        message.channel.send(`${tekkenSearch(args)}`);
+        message.channel.send({ embed: tekkenSearch(args) });
+        break;
+      case '!help':
+        message.channel.send({ embed: { url: 'https://github.com/diego-ramos130/izzybot/blob/master/README.md#commands' } });
         break;
       default:
         message.channel.send('?');
