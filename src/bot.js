@@ -25,7 +25,7 @@ client.on('message', (message) => {
         message.channel.send({ embed: tekkenSearch(args) });
         break;
       case '!help':
-        message.channel.send({ embed: { url: 'https://github.com/diego-ramos130/izzybot/blob/master/README.md#commands' } });
+        message.channel.send('https://github.com/diego-ramos130/izzybot/blob/master/README.md#commands');
         break;
       default:
         message.channel.send('?');

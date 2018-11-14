@@ -14,17 +14,17 @@ module.exports = (command) => {
 
   const moves = JSON.parse(fs.readFileSync(`${__dirname}/../../json/${char}.json`));
 
-  const foundMove = moves.find((move) => {
-    return move.Command === queryMove;
+  // const foundMove = moves.find((move) => {
+  //   return move.Command === queryMove;
+  // });
+  // if (foundMove === undefined) {
+  const foundMoveTwo = moves.find((move) => {
+    return move.Command.includes(queryMove);
   });
-  if (foundMove === undefined) {
-    const foundMoveTwo = moves.find((move) => {
-      return move.Command.includes(queryMove);
-    });
-    if (foundMoveTwo === undefined) {
-      return 'Not found!';
-    }
-    return tekkenParser(foundMoveTwo);
+  if (foundMoveTwo === undefined) {
+    return 'Not found!';
   }
-  return tekkenParser(foundMove);
+  return tekkenParser(foundMoveTwo);
+
+  // return tekkenParser(foundMove);
 };
