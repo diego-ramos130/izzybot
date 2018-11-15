@@ -1,6 +1,7 @@
 'use strict';
 
-const ytdl = require('ytdl-core');
+const youtubePlay = require('./music/youtubePlay');
+
 /** order of concerns:
  * 1. get the bot to leave and rejoin a vc. DONE
  * 2. get the bot to play a youtube/soundcloud/etc through the vc.
@@ -19,9 +20,10 @@ const ytdl = require('ytdl-core');
  * parse which music service the user is trying to query.
   * use the correct method (ytdl or soundcloud or w/e) in order to play the music.
   * handle that method in another file's function and return it here. */
-module.exports = (voiceBroadcast, args) => {
+module.exports = async (args) => {
   const url = args.trim().split(' ')[1];
   if (url.includes('https://youtube.com' || 'https://youtu.be')) {
-
+    await youtubePlay(url);
   }
+  return 1;
 };

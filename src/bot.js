@@ -8,6 +8,7 @@ const music = require('./commands/music');
 const client = new Discord.Client();
 let connection;
 
+
 client.on('ready', () => {
   console.log('I am ready!');
 });
@@ -46,11 +47,13 @@ client.on('message', async (message) => {
       case '!join':
         if (message.member.voiceChannel) {
           message.member.voiceChannel.join()
-            .then((con) => { // Connection is an instance of VoiceConnection
+            .then((con) => { 
               connection = con;
               message.channel.send('Joined the channel.');
             })
-            .catch(error => console.error(error));
+            .catch((error) => {
+              return new Error(error);
+            });
         } else {
           message.channel.send('You need to join a voice channel first!');
         }
@@ -58,9 +61,12 @@ client.on('message', async (message) => {
 
       case '!play':
         if (connection && message.member.voiceChannel) {
-          return client.createVoiceBroadcast()
-            .then((voiceBroadcast) => {
-              music(voiceBroadcast, args);
+          music(args) 
+            .then((stream) => {
+              connection.play(stream);
+            })
+            .catch((error) => {
+              return new Error(error);
             });
         }
         break;
