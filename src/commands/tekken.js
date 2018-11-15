@@ -2,9 +2,9 @@
 
 const fs = require('fs');
 
-const charQuery = require('./charQuery');
-const moveQuery = require('./moveQuery');
-const tekkenParser = require('./tekkenParser');
+const charQuery = require('./tekken/charQuery');
+const moveQuery = require('./tekken/moveQuery');
+const tekkenParser = require('./tekken/tekkenParser');
 
 module.exports = (command) => {
   const splitCommands = command.trim().split(' ');
@@ -13,14 +13,16 @@ module.exports = (command) => {
   const char = charQuery(splitCommands);
 
   const moves = JSON.parse(fs.readFileSync(`${__dirname}/../../json/${char}.json`));
-
-  // const foundMove = moves.find((move) => {
-  //   return move.Command === queryMove;
-  // });
-  // if (foundMove === undefined) {
-  const foundMove = moves.find((move) => {
-    return move.Command.includes(queryMove);
-  });
+  let foundMove;
+  if (queryMove.length === 1) {
+    foundMove = moves.find((move) => {
+      return move.Command === queryMove;
+    });
+  } else {
+    foundMove = moves.find((move) => {
+      return move.Command.includes(queryMove);
+    });
+  }
   if (foundMove === undefined) {
     return 'Not found!';
   }
@@ -32,8 +34,5 @@ module.exports = (command) => {
 
   const embed = tekkenParser(foundMove);
   embed.setTitle(title);
-  embed.setDescription(queryMove);
   return embed;
-
-  // return tekkenParser(foundMove);
 };
